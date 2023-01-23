@@ -84,7 +84,7 @@ public class CountryPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewData
     open var theme: CountryViewTheme?
     
     //Countries stored locally to avoid heavier `JSONSerialization` operation
-    private let locallyStoredCountries: Set<Country>
+    private let locallyStoredCountries: [Country]
     
     init() {
         self.locallyStoredCountries = CountryPicker.countryNamesByCode()
@@ -174,8 +174,8 @@ public class CountryPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewData
     /// sorted array with data
     ///
     /// - Returns: sorted array with all information phone, flag, name
-    private static func countryNamesByCode() -> Set<Country> {
-        var countries = Set<Country>()
+    private static func countryNamesByCode() -> [Country] {
+        var countries = [Country]()
         let frameworkBundle = Bundle.module
         
         guard let jsonPath = frameworkBundle.path(forResource: "countryCodes", ofType: "json"), let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonPath)) else {
@@ -200,7 +200,7 @@ public class CountryPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewData
                     let flagName = "\(code.uppercased())"
                     
                     let country = Country(code: code, name: name, phoneCode: phoneCode, flagName: flagName)
-                    countries.insert(country)
+                    countries.append(country)
                 }
                 
             }
