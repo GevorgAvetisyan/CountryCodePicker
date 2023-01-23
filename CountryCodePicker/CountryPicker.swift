@@ -312,7 +312,7 @@ private extension CountryPicker {
         countries = Array(filteredCountries)
         
         //Sorting countries based on name
-        sortCountries()
+//        sortCountries()
     }
     
     func sortCountries() {
